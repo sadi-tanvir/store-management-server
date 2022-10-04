@@ -8,7 +8,6 @@ export interface IUser extends Document {
     image: string;
     phone: string;
     role: string;
-    status: string;
     accountStatus: string;
 }
 
