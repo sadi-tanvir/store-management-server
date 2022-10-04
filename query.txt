@@ -1,0 +1,109 @@
+<---------------------------------------------------------->
+(Sign Up User)
+
+#Query
+mutation createUser($userNew:UserSignUpInput!) {
+  signUpUser(userData:$userNew){
+    name
+    email
+    password
+  }
+}
+
+#Variables
+{
+  "userNew": {
+    "name": "Tanvir Hossain Sadi",
+    "email":"sadi-1@sadi.com",
+    "password": "23629"
+  }
+}
+
+<---------------------------------------------------------->
+<---------------------------------------------------------->
+
+(Sign In User)
+
+#Query
+mutation loginUser($info:UserSignInInput!) {
+  signInUser(userData:$info){
+    _id
+    name
+    email
+    password
+  }
+}
+
+#Variables
+{
+  "info": {
+    "email":"sami@gmail.com",
+    "password": "23629"
+  }
+}
+<---------------------------------------------------------->
+<---------------------------------------------------------->
+#Query
+query findUsers {
+  users {
+    _id
+    name
+    email
+    password
+  }
+}
+
+<---------------------------------------------------------->
+<---------------------------------------------------------->
+#Query
+mutation createJob($info:JobInput!) {
+  createJob(jobInfo:$info){
+    companyName
+    companyEmail
+  }
+}
+
+#Variables
+{
+  "info": {
+    		"companyName": "brain statin 23",
+        "companyEmail": "brain@station.com",
+        "jobTitle": "mern developer",
+        "description": "reactjs , next.js , GraphQL",
+        "location": "dhaka, mohammadpur",
+        "salary": 50000,
+        "extraInfo": "this job is very good",
+        "currentStatus": "no response"
+  }
+}
+<---------------------------------------------------------->
+<---------------------------------------------------------->
+#Query
+query findJobs {
+  jobs{
+    companyName
+    companyEmail
+    salary
+  }
+}
+
+<---------------------------------------------------------->
+<---------------------------------------------------------->
+#Query
+query deleteJobById($id:ID!){
+  deleteJob(id:$id){
+    message
+  }
+}
+
+#Variables
+{
+  "id":"631c472f1534e1d047393f98"
+}
+
+<---------------------------------------------------------->
+<---------------------------------------------------------->
+
+
+<---------------------------------------------------------->
+<---------------------------------------------------------->
