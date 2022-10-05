@@ -2,20 +2,24 @@
 (Sign Up User)
 
 #Query
-mutation createUser($userNew:UserSignUpInput!) {
-  signUpUser(userData:$userNew){
-    name
-    email
-    password
-    phone
+mutation createUser($info:UserSignUpInput!) {
+  signUpUser(userData:$info){
+    status
+    message
+    user {
+      name
+    	email
+    	password
+    	phone
+    }
   }
 }
 
 #Variables
 {
-  "userNew": {
+  "info": {
     		"name": "Tanvir Hossain Sadi",
-        "email": "sadi3@gmail.com",
+        "email": "sadi5@gmail.com",
         "password": "23629",
         "phone": "01881540890"
   }
@@ -29,10 +33,14 @@ mutation createUser($userNew:UserSignUpInput!) {
 #Query
 mutation loginUser($info:UserSignInInput!) {
   signInUser(userData:$info){
-    _id
-    name
-    email
-    password
+    status
+    message
+    user {
+      _id
+    	name
+    	email
+    	password
+    }
   }
 }
 

@@ -28,7 +28,28 @@ const usersResolver = {
             });
             await user.save();
 
-            return user
+            return {
+                status: true,
+                message: 'The user has created successfully',
+                user: user
+            }
+        },
+        signInUser: async (_: any, { userData }: UserSignUpType) => {
+            const { email, password } = userData;
+
+            // checking user existence
+            const user = await User.findOne({ email });
+            if (!user) throw new Error("The User doesn't exist");
+
+            const isPasswordMatch = await bcrypt.compare(password, user.password);
+            if (!isPasswordMatch) throw new Error("Email or Password is incorrect");
+
+
+            return {
+                status: true,
+                message: 'User Logged In Successfully',
+                user: user
+            }
         }
     }
 };
