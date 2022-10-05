@@ -25,3 +25,21 @@ export interface StockSchemaType extends Document {
     suppliedBy: any;
     sellCount: number;
 }
+
+export interface CategorySchemaType extends Document {
+    name: string;
+    description: string;
+}
+
+
+export interface SupplierSchemaType extends Document {
+    name: string;
+    email: string;
+    brand: string;
+    contactNumber: string;
+    tradeLicenseNumber: string;
+    presentAddress: string;
+    permanentAddress: string;
+    imageUrl: string;
+    status: string;
+}
