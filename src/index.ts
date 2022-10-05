@@ -1,3 +1,5 @@
+import dotenv from "dotenv"
+dotenv.config()
 import express, { Express } from 'express'
 import http from 'http'
 import { ApolloServer, gql } from 'apollo-server-express'
@@ -19,7 +21,6 @@ import resolvers from "./gql/resolvers/index"
 
 
 
-
 async function listen(port: number) {
   const app: Express = express()
   const httpServer = http.createServer(app)
@@ -29,7 +30,7 @@ async function listen(port: number) {
   const context = ({ req }: { req: any }) => {
     const { authorization } = req.headers
     if (authorization) {
-      const decode: any | JwtPayload = jwt.verify(authorization, 'this is secret key')
+      const decode: any = jwt.verify(authorization, process.env.SECRET_KEY)
       return {
         email: decode?.email
       }
@@ -57,8 +58,8 @@ async function listen(port: number) {
 
 async function main() {
   try {
-    await listen(4000)
-    console.log('🚀 Server is ready at http://localhost:4000/graphql')
+    await listen(process.env.PORT)
+    console.log(`🚀 Server is ready at http://localhost:${process.env.PORT}/graphql`)
   } catch (err) {
     console.error('💀 Error starting the node server', err)
   }

@@ -9,3 +9,19 @@ export interface UserSchemaType extends Document {
     role: string;
     accountStatus: string;
 }
+
+
+export interface StockSchemaType extends Document {
+    productId: any;
+    name: string;
+    description: string;
+    unit: string;
+    imageUrl: string[];
+    price: number;
+    quantity: number;
+    categories: string;
+    brand: any;
+    status: string;
+    suppliedBy: any;
+    sellCount: number;
+}
