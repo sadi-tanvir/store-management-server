@@ -1,17 +1,10 @@
-import { Document, model, Schema } from "mongoose";
+import { model, Schema } from "mongoose";
 import validator from "validator";
+import { UserSchemaType } from "../types/models.type";
 
-export interface IUser extends Document {
-    name: string;
-    email: string;
-    password: string;
-    image: string;
-    phone: string;
-    role: string;
-    accountStatus: string;
-}
 
-const userSchema = new Schema<IUser>({
+
+const userSchema = new Schema<UserSchemaType>({
     name: {
         type: String,
         required: [true, "Please add a name"],
@@ -50,4 +43,4 @@ const userSchema = new Schema<IUser>({
     }
 }, { timestamps: true });
 
-export default model<IUser>('User', userSchema)
+export default model<UserSchemaType>('User', userSchema)

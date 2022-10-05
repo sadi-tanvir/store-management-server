@@ -7,15 +7,17 @@ mutation createUser($userNew:UserSignUpInput!) {
     name
     email
     password
+    phone
   }
 }
 
 #Variables
 {
   "userNew": {
-    "name": "Tanvir Hossain Sadi",
-    "email":"sadi-1@sadi.com",
-    "password": "23629"
+    		"name": "Tanvir Hossain Sadi",
+        "email": "sadi3@gmail.com",
+        "password": "23629",
+        "phone": "01881540890"
   }
 }
 
