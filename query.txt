@@ -53,7 +53,7 @@ mutation loginUser($info:UserSignInInput!) {
 }
 <---------------------------------------------------------->
 <---------------------------------------------------------->
-#Query
+#Query (Only for Admin)
 query findUsers {
   users {
     _id
@@ -61,6 +61,11 @@ query findUsers {
     email
     password
   }
+}
+
+#headers
+{
+  "authorization": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNhZGlAZ21haWwuY29tIiwiaWF0IjoxNjY0OTUxODgzfQ.EZcs2yNxKjGi2bFHt5xMoZpMzrUlzAmUqeZrEL4X2iA"
 }
 
 <---------------------------------------------------------->

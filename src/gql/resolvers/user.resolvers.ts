@@ -3,11 +3,18 @@ import { HydratedDocument } from 'mongoose';
 import { UserSignUpType } from "../../types/resolvers.types";
 import bcrypt from "bcryptjs";
 import { UserSchemaType } from "../../types/models.type";
+import jwt from "jsonwebtoken";
 
 
 const usersResolver = {
     Query: {
+        users: async (_: any, args: any, context: { email: string }) => {
+            const isAdmin = await User.findOne({ email: context.email, role: "admin" });
+            if (!isAdmin) throw new Error("You are not authorized to view this page");
 
+            const users = await User.find();
+            return users;
+        }
     },
     Mutation: {
         signUpUser: async (_: any, { userData }: UserSignUpType) => {
@@ -44,11 +51,14 @@ const usersResolver = {
             const isPasswordMatch = await bcrypt.compare(password, user.password);
             if (!isPasswordMatch) throw new Error("Email or Password is incorrect");
 
+            // generate jwt token
+            const token = jwt.sign({ email: user.email }, 'this is secret key')
 
             return {
                 status: true,
                 message: 'User Logged In Successfully',
-                user: user
+                user: user,
+                token
             }
         }
     }

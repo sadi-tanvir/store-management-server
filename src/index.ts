@@ -7,6 +7,8 @@ import {
   ApolloServerPluginDrainHttpServer,
   ApolloServerPluginLandingPageLocalDefault
 } from "apollo-server-core"
+import cors from "cors"
+import jwt, { JwtPayload } from "jsonwebtoken"
 
 // database
 import "./db/db"
@@ -22,9 +24,22 @@ async function listen(port: number) {
   const app: Express = express()
   const httpServer = http.createServer(app)
 
+  // middleware
+  app.use(cors())
+  const context = ({ req }: { req: any }) => {
+    const { authorization } = req.headers
+    if (authorization) {
+      const decode: any | JwtPayload = jwt.verify(authorization, 'this is secret key')
+      return {
+        email: decode?.email
+      }
+    }
+  }
+
   const server = new ApolloServer({
     typeDefs: Schema,
     resolvers,
+    context,
     plugins: [
       ApolloServerPluginDrainHttpServer({ httpServer }),
       ApolloServerPluginLandingPageDisabled(),
