@@ -2,30 +2,10 @@ import { gql } from 'apollo-server-express'
 
 
 export default gql`
-    extend type Query {
-        brands: [Brand]
-    }
+    
 
     extend type Mutation {
         createBrand(data:BrandInputData!): BrandResponse
-    }
-
-    input BrandInputData {
-        name: String!
-        description: String
-        email: String!
-        phone: String
-        website: String
-        location: String
-        products: [ID]
-        suppliers: [SupplierInputData]
-    }
-
-    input SupplierInputData {
-        name: String
-        email: String
-        phone: String
-        id: ID
     }
 
     type BrandResponse {
@@ -52,21 +32,36 @@ export default gql`
         description: String
         unit: String
         imageUrl: [String]
-        categories: ProductCategory
+        categories: {
+            id: ID
+            name: String
+        }
     }
 
     type Supplier {
         name: String
         email: String
-        brand: SupplierBrand 
+        brand: {
+            id: ID
+            name: String
+        }
+    }
+    
+    input BrandInputData {
+        name: String!
+        description: String!
+        email: String!
+        phone: String
+        website: String
+        location: String
+        products: [ID]
+        suppliers: [SupplierInputData]
     }
 
-    type ProductCategory {
+    type SupplierInputData {
         name: String
+        email: String
+        phone: String
         id: ID
-    }
-    type SupplierBrand {
-        id: ID
-        name: String
     }
 `

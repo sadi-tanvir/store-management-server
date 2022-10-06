@@ -1,3 +1,7 @@
+export type ContextTypes = {
+    email: string
+}
+
 export type UserType = {
     userData: {
         name: string;
@@ -14,6 +18,27 @@ export type UserServiceType = {
     phone: string;
 }
 
-export type ContextTypes = {
-    email: string
+export type BrandType = {
+    data: {
+        name: string;
+        description: string;
+        email: string;
+        phone: string;
+        website: string;
+        location: string;
+        products: string[];
+        suppliers: {
+            name: string;
+            email: string;
+            phone: string;
+            id: string;
+        }[];
+    }
+}
+
+export type CategoryType = {
+    data: {
+        name: string;
+        description: string
+    }
 }

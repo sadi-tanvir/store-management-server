@@ -1,5 +1,7 @@
 import { gql } from 'apollo-server-express'
 import userSchema from "./user.schema"
+import brandSchema from "./brand.schema"
+import categorySchema from "./category.schema"
 
 const rootSchema = gql`
     type Query {
@@ -9,4 +11,9 @@ const rootSchema = gql`
         _:Boolean
     }
 `
-export default [rootSchema, userSchema]
+export default [
+    rootSchema,
+    userSchema,
+    brandSchema,
+    categorySchema
+]

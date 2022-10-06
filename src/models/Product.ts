@@ -7,8 +7,8 @@ export interface ProductType extends Document {
     description: string;
     unit: string;
     imageUrl: string[];
-    categories: { _id: string; name: string; };
-    brand: { _id: string; name: string; },
+    categories: { id: string; name: string; };
+    brand: { id: string; name: string; },
 }
 
 const productSchema = new Schema<ProductType>({
@@ -57,7 +57,7 @@ const productSchema = new Schema<ProductType>({
     }],
 
     categories: {
-        _id: Schema.Types.ObjectId,
+        id: Schema.Types.ObjectId,
         name: {
             type: String,
             required: true,
@@ -81,16 +81,3 @@ const productSchema = new Schema<ProductType>({
 
 
 export default model<ProductType>("Product", productSchema);
-
-
-
-
-// productSchema.post('save', function (doc, next) {
-//     console.log(doc);
-//     console.log("Product is saved successfully..");
-//     next();
-// })
-
-// productSchema.methods.logger = function () {
-//     console.log("methods logger function.");
-// }
