@@ -3,9 +3,6 @@ import validator from "validator"
 import { SupplierSchemaType } from "../types/models.type"
 
 
-
-
-
 const supplierSchema = new Schema<SupplierSchemaType>({
     name: {
         type: String,

@@ -43,3 +43,15 @@ export interface SupplierSchemaType extends Document {
     imageUrl: string;
     status: string;
 }
+
+export interface BrandSchemaType extends Document {
+    name: string;
+    description: string;
+    email: string;
+    phone: string;
+    website: string;
+    location: string;
+    products: any[];
+    suppliers: any[];
+    status: string;
+}

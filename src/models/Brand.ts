@@ -1,17 +1,7 @@
 import { Schema, model, Document } from "mongoose"
 import validator from "validator"
+import { BrandSchemaType } from "../types/models.type"
 
-export interface BrandSchemaType extends Document {
-    name: string;
-    description: string;
-    email: string;
-    phone: string;
-    website: string;
-    location: string;
-    products: any[];
-    suppliers: any[];
-    status: string;
-}
 
 const brandSchema = new Schema<BrandSchemaType>({
     name: {
@@ -33,6 +23,11 @@ const brandSchema = new Schema<BrandSchemaType>({
         type: String,
         validate: [validator.isURL, "Please enter a valid URL"]
     },
+    status: {
+        type: String,
+        enum: ["active", "inactive"],
+        default: "active"
+    },
     location: String,
     products: [{
         type: Schema.Types.ObjectId,
@@ -46,12 +41,7 @@ const brandSchema = new Schema<BrandSchemaType>({
             type: Schema.Types.ObjectId,
             ref: "Supplier"
         }
-    }],
-    status: {
-        type: String,
-        enum: ["active", "inactive"],
-        default: "active"
-    }
+    }]
 }, { timestamps: true })
 
 
