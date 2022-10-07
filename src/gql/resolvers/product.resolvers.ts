@@ -6,7 +6,7 @@ import { createProductService, getProductByIdService, getProductsService } from 
 
 
 
-const brandResolver = {
+const productResolver = {
     Query: {
         products: async (_: any, args: any, context: ContextTypes) => {
             // checking admin
@@ -48,4 +48,4 @@ const brandResolver = {
     }
 };
 
-export default brandResolver;
+export default productResolver;

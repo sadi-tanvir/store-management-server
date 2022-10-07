@@ -19,11 +19,11 @@ export interface StockSchemaType extends Document {
     imageUrl: string[];
     price: number;
     quantity: number;
-    categories: string;
-    brand: any;
+    category: any;
     status: string;
-    suppliedBy: any;
     sellCount: number;
+    brand: any;
+    suppliedBy: any;
 }
 
 export interface CategorySchemaType extends Document {

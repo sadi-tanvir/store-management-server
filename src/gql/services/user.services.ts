@@ -2,7 +2,8 @@ import User from "../../models/User";
 import bcrypt from "bcryptjs";
 import { UserSchemaType } from "../../types/models.type";
 import { HydratedDocument } from "mongoose";
-import { ContextTypes, UserServiceType } from "../../types/resolvers.types";
+import { ContextTypes } from "../../types/resolvers.types";
+import { UserServiceType } from "../../types/services.types";
 
 // create user service
 export const createUserService = async ({ name, email, password, phone }: UserServiceType) => {

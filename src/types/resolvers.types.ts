@@ -11,12 +11,6 @@ export type UserType = {
     }
 }
 
-export type UserServiceType = {
-    name: string;
-    email: string;
-    password: string;
-    phone: string;
-}
 
 export type BrandType = {
     data: {
@@ -74,6 +68,32 @@ export type SupplierType = {
         brand: {
             id: string;
             name: string;
+        }
+    }
+}
+
+
+export type StockType = {
+    data: {
+        productId: string;
+        name: string;
+        description: string;
+        unit: string;
+        imageUrl: string[];
+        price: Number;
+        quantity: Number;
+        status: string;
+        category: {
+            name: string;
+            id: string;
+        };
+        brand: {
+            name: string;
+            id: string;
+        }
+        suppliedBy: {
+            name: string;
+            id: string;
         }
     }
 }

@@ -8,7 +8,7 @@ import { checkAdminService, createUserService, isUserExistService } from "../ser
 
 
 
-const usersResolver = {
+const userResolver = {
     Query: {
         users: async (_: any, args: any, context: ContextTypes) => {
             const isAdmin = await checkAdminService(context)
@@ -59,4 +59,4 @@ const usersResolver = {
     }
 };
 
-export default usersResolver;
+export default userResolver;

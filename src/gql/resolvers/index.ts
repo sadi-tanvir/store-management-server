@@ -3,6 +3,7 @@ import usersResolver from "./user.resolvers";
 import categoryResolver from "./category.resolvers";
 import productResolver from "./product.resolvers";
 import supplierResolver from "./supplier.resolvers";
+import stockResolver from "./stock.resolvers";
 
 
 
@@ -11,5 +12,6 @@ export default [
     brandResolver,
     categoryResolver,
     productResolver,
-    supplierResolver
+    supplierResolver,
+    stockResolver
 ]

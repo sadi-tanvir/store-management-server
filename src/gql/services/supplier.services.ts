@@ -1,21 +1,7 @@
 import { ObjectId } from "mongodb";
-import Product from "../../models/Product";
 import Supplier from "../../models/Supplier";
-import { ProductServiceType } from "../../types/services.types";
+import { SupplierServiceType } from "../../types/services.types";
 
-export type SupplierServiceType = {
-    name: string;
-    email: string;
-    contactNumber: string;
-    tradeLicenseNumber: string;
-    presentAddress: string;
-    permanentAddress: string;
-    imageUrl: string;
-    brand: {
-        id: string;
-        name: string;
-    }
-}
 
 // create product service
 export const createSupplierService = async (data: SupplierServiceType) => {

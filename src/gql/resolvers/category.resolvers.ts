@@ -7,7 +7,7 @@ import { checkAdminService } from "../services/user.services";
 
 
 
-const brandResolver = {
+const categoryResolver = {
     Query: {
         categories: async (_: any, args: any, context: ContextTypes) => {
             // checking admin
@@ -41,4 +41,4 @@ const brandResolver = {
     }
 };
 
-export default brandResolver;
+export default categoryResolver;

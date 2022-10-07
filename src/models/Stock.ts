@@ -62,9 +62,25 @@ const stockSchema = new Schema<StockSchemaType>({
         },
         message: "Quantity must be an integer"
     },
-    categories: {
+    category: {
+        name: String,
+        id: {
+            type: Schema.Types.ObjectId,
+            ref: "Category",
+        }
+    },
+    status: {
         type: String,
-        required: true,
+        required: [true, "Status is required"],
+        enum: {
+            values: ["in-stock", "out-of-stock", "discontinued"],
+            message: "Status value can't be {VALUE} only in-stock, out-of-stock or discontinued"
+        }
+    },
+    sellCount: {
+        type: Number,
+        default: 0,
+        min: [0, "Sell count cannot be negative"]
     },
     brand: {
         name: {
@@ -76,16 +92,6 @@ const stockSchema = new Schema<StockSchemaType>({
             ref: "Brand"
         }
     },
-
-    status: {
-        type: String,
-        required: [true, "Status is required"],
-        enum: {
-            values: ["in-stock", "out-of-stock", "discontinued"],
-            message: "Status value can't be {VALUE} only in-stock, out-of-stock or discontinued"
-        }
-    },
-
     suppliedBy: {
         name: {
             type: String,
@@ -96,11 +102,6 @@ const stockSchema = new Schema<StockSchemaType>({
             type: Schema.Types.ObjectId,
             ref: "Supplier",
         }
-    },
-    sellCount: {
-        type: Number,
-        default: 0,
-        min: [0, "Sell count cannot be negative"]
     }
 
 }, { timestamps: true });

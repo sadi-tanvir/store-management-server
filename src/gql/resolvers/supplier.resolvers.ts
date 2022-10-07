@@ -1,15 +1,13 @@
 import dotenv from "dotenv"
-import { ObjectId } from "mongodb";
 dotenv.config()
-import Supplier from "../../models/Supplier";
-import { BrandType, ContextTypes, SupplierType } from "../../types/resolvers.types";
+import { ContextTypes, SupplierType } from "../../types/resolvers.types";
 import { createSupplierService, getSuppliersService, getSupplierByIdService } from "../services/supplier.services";
-import { checkAdminService, createUserService, isUserExistService } from "../services/user.services";
+import { checkAdminService } from "../services/user.services";
 
 
 
 
-const brandResolver = {
+const supplierResolver = {
     Query: {
         suppliers: async (_: any, args: any, context: ContextTypes) => {
             // checking admin
@@ -28,8 +26,7 @@ const brandResolver = {
             // get supplier by id
             const suppliers = await getSupplierByIdService(id);
             return suppliers;
-        },
-
+        }
     },
 
     Mutation: {
@@ -51,4 +48,4 @@ const brandResolver = {
     }
 };
 
-export default brandResolver;
+export default supplierResolver;
