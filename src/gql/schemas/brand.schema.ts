@@ -37,8 +37,8 @@ export default gql`
     type Brand {
         _id: ID
         name: String!
-        description: String!
-        email: String!
+        description: String
+        email: String
         phone: String
         website: String
         location: String
@@ -65,6 +65,7 @@ export default gql`
         name: String
         id: ID
     }
+    
     type SupplierBrand {
         id: ID
         name: String

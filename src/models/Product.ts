@@ -7,8 +7,8 @@ export interface ProductType extends Document {
     description: string;
     unit: string;
     imageUrl: string[];
-    categories: { id: string; name: string; };
-    brand: { id: string; name: string; },
+    category: { id: string; name: string; };
+    brand: { id: string; name: string; };
 }
 
 const productSchema = new Schema<ProductType>({
@@ -38,26 +38,14 @@ const productSchema = new Schema<ProductType>({
 
     imageUrl: [{
         type: String,
-        validate: {
-            validator: (value: string[]) => {
-                if (!Array.isArray(value)) {
-                    return false;
-                }
-
-                let isValid = true;
-                value.forEach((url: string) => {
-                    if (!validator.isURL(url)) {
-                        isValid = false
-                    }
-                })
-
-                return isValid;
-            }
-        }
+        validate: [validator.isURL, "Please provide a valid URL"]
     }],
 
-    categories: {
-        id: Schema.Types.ObjectId,
+    category: {
+        id: {
+            type: Schema.Types.ObjectId,
+            ref: "Category",
+        },
         name: {
             type: String,
             required: true,
