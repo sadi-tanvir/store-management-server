@@ -3,6 +3,7 @@ import userSchema from "./user.schema"
 import brandSchema from "./brand.schema"
 import categorySchema from "./category.schema"
 import productSchema from "./product.schema"
+import supplierSchema from "./supplier.schema"
 
 const rootSchema = gql`
     type Query {
@@ -17,5 +18,6 @@ export default [
     userSchema,
     brandSchema,
     categorySchema,
-    productSchema
+    productSchema,
+    supplierSchema
 ]

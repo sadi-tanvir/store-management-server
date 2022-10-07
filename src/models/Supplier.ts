@@ -20,18 +20,6 @@ const supplierSchema = new Schema<SupplierSchemaType>({
         trim: true,
         lowercase: true
     },
-    brand: {
-        name: {
-            type: String,
-            trim: true,
-            required: true
-        },
-        id: {
-            type: Schema.Types.ObjectId,
-            required: true,
-            ref: 'Brand'
-        }
-    },
     contactNumber: {
         type: String,
         required: [true, "Contact number is required"],
@@ -52,7 +40,19 @@ const supplierSchema = new Schema<SupplierSchemaType>({
         type: String,
         enum: ['active', 'inactive', 'discontinued'],
         default: 'active'
-    }
+    },
+    brand: {
+        name: {
+            type: String,
+            trim: true,
+            required: true
+        },
+        id: {
+            type: Schema.Types.ObjectId,
+            required: true,
+            ref: 'Brand'
+        }
+    },
 }, { timestamps: true })
 
 

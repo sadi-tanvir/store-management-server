@@ -58,16 +58,11 @@ export default gql`
     type Supplier {
         name: String
         email: String
-        brand: SupplierBrand 
+        brand: BrandRef 
     }
 
     type ProductCategory {
         name: String
         id: ID
-    }
-    
-    type SupplierBrand {
-        id: ID
-        name: String
     }
 `

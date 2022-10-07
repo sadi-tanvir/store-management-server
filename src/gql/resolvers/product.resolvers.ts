@@ -1,26 +1,9 @@
 import dotenv from "dotenv"
 dotenv.config()
-import Product from "../../models/Product";
-import { ContextTypes } from "../../types/resolvers.types";
+import { ContextTypes, ProductType } from "../../types/resolvers.types";
 import { checkAdminService } from "../services/user.services";
-import { ObjectId } from "mongodb"
+import { createProductService, getProductByIdService, getProductsService } from "../services/product.services";
 
-export type ProductType = {
-    data: {
-        name: string;
-        description: string;
-        unit: string;
-        imageUrl: string[];
-        category: {
-            id: string;
-            name: string;
-        }
-        brand: {
-            id: string;
-            name: string;
-        }
-    }
-}
 
 
 const brandResolver = {
@@ -30,9 +13,8 @@ const brandResolver = {
             const isAdmin = await checkAdminService(context)
             if (!isAdmin) throw new Error("You are not authorized to add product");
 
-            const products = await Product.find()
-                .populate('category.id')
-                .populate('brand.id');
+            // find all products
+            const products = await getProductsService()
             return products;
         },
         productById: async (_: any, { id }: { id: string }, context: ContextTypes) => {
@@ -40,10 +22,8 @@ const brandResolver = {
             const isAdmin = await checkAdminService(context)
             if (!isAdmin) throw new Error("You are not authorized to add product");
 
-            const product = await Product.findOne({ _id: new ObjectId(id) })
-                .populate('category.id')
-                .populate('brand.id');
-            console.log(product);
+            // get product by id
+            const product = await getProductByIdService(id)
 
             return product;
         }
@@ -55,21 +35,8 @@ const brandResolver = {
             const isAdmin = await checkAdminService(context)
             if (!isAdmin) throw new Error("You are not authorized to add product");
 
-            // create brand
-            const product = await Product.create({
-                name: data.name,
-                description: data.description,
-                unit: data.unit,
-                imageUrl: data.imageUrl,
-                category: {
-                    id: new ObjectId(data.category.id),
-                    name: data.category.name
-                },
-                brand: {
-                    id: new ObjectId(data.brand.id),
-                    name: data.brand.name
-                }
-            })
+            // create product
+            const product = await createProductService(data)
             if (!product) throw new Error("Failed to Create a Product.")
 
             return {

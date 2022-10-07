@@ -17,7 +17,7 @@ export default gql`
         unit: String!
         imageUrl: [String]
         category: CategoryInput
-        brand: BrandInput
+        brand: BrandInputRef
     }
 
     input CategoryInput {
@@ -25,7 +25,7 @@ export default gql`
         name: String
     }
 
-    input BrandInput {
+    input BrandInputRef {
         id: ID
         name: String
     }
@@ -59,6 +59,6 @@ export default gql`
     type Supplier {
         name: String
         email: String
-        brand: SupplierBrand 
+        brand: BrandRef 
     }
 `

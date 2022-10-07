@@ -35,13 +35,13 @@ export interface CategorySchemaType extends Document {
 export interface SupplierSchemaType extends Document {
     name: string;
     email: string;
-    brand: string;
     contactNumber: string;
     tradeLicenseNumber: string;
     presentAddress: string;
     permanentAddress: string;
     imageUrl: string;
     status: string;
+    brand: string;
 }
 
 export interface BrandSchemaType extends Document {
