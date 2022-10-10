@@ -8,6 +8,7 @@ export interface UserSchemaType extends Document {
     phone: string;
     role: string;
     accountStatus: string;
+    darkMode: boolean;
 }
 
 

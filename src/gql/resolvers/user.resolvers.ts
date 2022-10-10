@@ -16,6 +16,20 @@ const userResolver = {
 
             const users = await User.find();
             return users;
+        },
+        darkMOde: async (_: any, args: any, context: ContextTypes) => {
+            const user = await User.findOne({ email: context.email });
+            if (!user) throw new Error("User not found");
+
+            if (user.darkMode === true) {
+                user.darkMode = false;
+                await user.save();
+            } else {
+                user.darkMode = true;
+                await user.save();
+            }
+
+            return user.darkMode;
         }
     },
 

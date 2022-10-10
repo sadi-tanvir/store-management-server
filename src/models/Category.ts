@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose"
-import { CategorySchemaType } from "../types/models.type"
+import { CategorySchemaType } from "../types/models.types"
 
 
 

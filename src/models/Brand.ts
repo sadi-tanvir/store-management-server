@@ -1,6 +1,6 @@
 import { Schema, model, Document } from "mongoose"
 import validator from "validator"
-import { BrandSchemaType } from "../types/models.type"
+import { BrandSchemaType } from "../types/models.types"
 
 
 const brandSchema = new Schema<BrandSchemaType>({

@@ -1,6 +1,6 @@
 import { model, Schema } from "mongoose";
 import validator from "validator";
-import { UserSchemaType } from "../types/models.type";
+import { UserSchemaType } from "../types/models.types";
 
 
 
@@ -40,6 +40,10 @@ const userSchema = new Schema<UserSchemaType>({
         type: String,
         enum: ["active", "inactive"],
         default: "inactive"
+    },
+    darkMode: {
+        type: Boolean,
+        default: true
     }
 }, { timestamps: true });
 

@@ -1,6 +1,6 @@
 import { Schema, model } from "mongoose";
 import validator from "validator"
-import { StockSchemaType } from "../types/models.type";
+import { StockSchemaType } from "../types/models.types";
 
 
 

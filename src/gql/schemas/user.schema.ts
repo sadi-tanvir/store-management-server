@@ -5,6 +5,7 @@ export default gql`
     
     extend type Query {
         users: [User!]!
+        darkMOde: Boolean!
     }
 
     extend type Mutation {
@@ -28,6 +29,7 @@ export default gql`
         phone: String
         role: String
         accountStatus: String
+        darkMode: Boolean
     }
 
     input UserSignUpInput {

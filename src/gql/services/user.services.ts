@@ -1,6 +1,6 @@
 import User from "../../models/User";
 import bcrypt from "bcryptjs";
-import { UserSchemaType } from "../../types/models.type";
+import { UserSchemaType } from "../../types/models.types";
 import { HydratedDocument } from "mongoose";
 import { ContextTypes } from "../../types/resolvers.types";
 import { UserServiceType } from "../../types/services.types";
