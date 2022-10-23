@@ -6,12 +6,13 @@ import { ContextTypes } from "../../types/resolvers.types";
 import { UserServiceType } from "../../types/services.types";
 
 // create user service
-export const createUserService = async ({ name, email, password, phone }: UserServiceType) => {
+export const createUserService = async ({ firstName, lastName, email, password, phone }: UserServiceType) => {
     var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync(password, salt);
 
     const user: HydratedDocument<UserSchemaType> = new User({
-        name: name,
+        firstName: firstName,
+        lastName: lastName,
         email: email,
         password: hash,
         phone: phone,

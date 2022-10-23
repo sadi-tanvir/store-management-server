@@ -32,7 +32,8 @@ async function listen(port: number) {
     if (authorization) {
       const decode: any = jwt.verify(authorization, process.env.SECRET_KEY)
       return {
-        email: decode?.email
+        email: decode?.email,
+        role: decode?.role
       }
     }
   }

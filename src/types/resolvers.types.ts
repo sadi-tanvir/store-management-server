@@ -1,10 +1,12 @@
 export type ContextTypes = {
-    email: string
+    email: string;
+    role?: string;
 }
 
 export type UserType = {
     userData: {
-        name: string;
+        firstName: string;
+        lastName: string;
         email: string;
         password: string;
         phone: string;

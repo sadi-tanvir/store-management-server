@@ -5,9 +5,14 @@ import { UserSchemaType } from "../types/models.types";
 
 
 const userSchema = new Schema<UserSchemaType>({
-    name: {
+    firstName: {
         type: String,
-        required: [true, "Please add a name"],
+        required: [true, "Please add a first name"],
+        trim: true
+    },
+    lastName: {
+        type: String,
+        required: [true, "Please add a last name"],
         trim: true
     },
     email: {
@@ -33,8 +38,28 @@ const userSchema = new Schema<UserSchemaType>({
     },
     role: {
         type: String,
-        enum: ["user", "moderator", "admin"],
+        enum: ["user", "manager", "admin"],
         default: "user"
+    },
+    gender: {
+        type: String,
+        enum: ['male', 'female', 'other', 'N/A'],
+        default: 'N/A'
+    },
+    currentAddress: {
+        type: String,
+        trim: true,
+        default: 'N/A'
+    },
+    permanentAddress: {
+        type: String,
+        trim: true,
+        default: 'N/A'
+    },
+    dateOfBirth: {
+        type: String,
+        trim: true,
+        default: 'N/A'
     },
     accountStatus: {
         type: String,

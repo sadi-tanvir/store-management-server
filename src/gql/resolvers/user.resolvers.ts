@@ -17,7 +17,14 @@ const userResolver = {
             const users = await User.find();
             return users;
         },
-        darkMOde: async (_: any, args: any, context: ContextTypes) => {
+        user: async (_: any, args: { id: string }, context: ContextTypes) => {
+            const isAdmin = await checkAdminService(context)
+            if (!isAdmin) throw new Error("You are not authorized to view this page");
+
+            const user = await User.findOne({ _id: args.id });
+            return user;
+        },
+        darkMode: async (_: any, args: any, context: ContextTypes) => {
             const user = await User.findOne({ email: context.email });
             if (!user) throw new Error("User not found");
 
@@ -61,7 +68,7 @@ const userResolver = {
             if (!isPasswordMatch) throw new Error("Email or Password is incorrect");
 
             // generate jwt token
-            const token = jwt.sign({ email: user.email }, process.env.SECRET_KEY)
+            const token = jwt.sign({ email: user.email, role: user.role }, process.env.SECRET_KEY)
 
             return {
                 status: true,
