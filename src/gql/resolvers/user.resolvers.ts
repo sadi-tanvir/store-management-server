@@ -24,6 +24,18 @@ const userResolver = {
             const user = await User.findOne({ _id: args.id });
             return user;
         },
+        deleteUserById: async (_: any, { id }: { id: string }, context: ContextTypes) => {
+            const isAdmin = await checkAdminService(context)
+            if (!isAdmin) throw new Error("You are not authorized to delete any user");
+
+            const isDelete = await User.findOneAndDelete({ _id: id });
+            if (!isDelete) throw new Error("Failed to delete user");
+
+            return {
+                status: true,
+                message: "The User has been deleted successfully"
+            };
+        },
         darkMode: async (_: any, args: any, context: ContextTypes) => {
             const user = await User.findOne({ email: context.email });
             if (!user) throw new Error("User not found");
@@ -79,7 +91,7 @@ const userResolver = {
         },
         updateUserByAdmin: async (_: any, { userData }: { userData: UserUpdateType }, context: ContextTypes) => {
             const isAdmin = await checkAdminService(context)
-            if (!isAdmin) throw new Error("You are not authorized to update a user");
+            if (!isAdmin) throw new Error("You are not authorized to update any user");
 
             // checking user existence
             const user = await updateUserByAdminService(userData)
