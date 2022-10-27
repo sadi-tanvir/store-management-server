@@ -99,3 +99,17 @@ export type StockType = {
         }
     }
 }
+
+export type UserUpdateType = {
+    _id: string,
+    firstName: string,
+    lastName: string,
+    email: string,
+    phone: string,
+    role: string,
+    gender: string,
+    currentAddress: string,
+    permanentAddress: string,
+    dateOfBirth: string,
+    accountStatus: string,
+}

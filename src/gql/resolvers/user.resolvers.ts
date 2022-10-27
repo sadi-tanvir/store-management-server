@@ -1,10 +1,10 @@
 import dotenv from "dotenv"
 dotenv.config()
 import User from "../../models/User";
-import { ContextTypes, UserType } from "../../types/resolvers.types";
+import { ContextTypes, UserType, UserUpdateType } from "../../types/resolvers.types";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
-import { checkAdminService, createUserService, isUserExistService } from "../services/user.services";
+import { checkAdminService, createUserService, isUserExistService, updateUserByAdminService } from "../services/user.services";
 
 
 
@@ -76,7 +76,23 @@ const userResolver = {
                 user: user,
                 token
             }
-        }
+        },
+        updateUserByAdmin: async (_: any, { userData }: { userData: UserUpdateType }, context: ContextTypes) => {
+            const isAdmin = await checkAdminService(context)
+            if (!isAdmin) throw new Error("You are not authorized to update a user");
+
+            // checking user existence
+            const user = await updateUserByAdminService(userData)
+
+            if (!user) throw new Error("Failed to update a user");
+
+            return {
+                status: true,
+                message: 'The User has been updated Successfully',
+                user: user
+            }
+        },
+
     }
 };
 

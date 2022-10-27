@@ -12,6 +12,7 @@ export default gql`
     extend type Mutation {
         signUpUser(userData:UserSignUpInput!): UserResponse
         signInUser(userData:UserSignInInput!): UserResponse
+        updateUserByAdmin(userData:updateUserByAdminInput!): UserResponse
     }
 
     type UserResponse {
@@ -49,5 +50,19 @@ export default gql`
     input UserSignInInput {
         email: String!
         password: String!
+    }
+
+    input updateUserByAdminInput {
+        _id: ID!
+        firstName: String!
+        lastName: String!
+        email: String!
+        phone: String!
+        role: String!
+        gender: String!
+        currentAddress: String!
+        permanentAddress: String!
+        dateOfBirth: String!
+        accountStatus: String!
     }
 `

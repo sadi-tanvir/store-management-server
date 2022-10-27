@@ -2,7 +2,7 @@ import User from "../../models/User";
 import bcrypt from "bcryptjs";
 import { UserSchemaType } from "../../types/models.types";
 import { HydratedDocument } from "mongoose";
-import { ContextTypes } from "../../types/resolvers.types";
+import { ContextTypes, UserUpdateType } from "../../types/resolvers.types";
 import { UserServiceType } from "../../types/services.types";
 
 // create user service
@@ -35,3 +35,15 @@ export const isUserExistService = async ({ email }: { email: string }) => {
     const user = await User.findOne({ email: email });
     return user;
 }
+
+
+// update user by admin service
+export const updateUserByAdminService = async (userData: UserUpdateType) => {
+    const user = await User.findOneAndUpdate(
+        { _id: userData._id },
+        { $set: userData },
+        { new: true, runValidators: true }
+    );
+    return user;
+}
+
