@@ -1,5 +1,5 @@
-import dotenv from "dotenv"
-dotenv.config()
+// import dotenv from "dotenv"
+// dotenv.config()
 import { ContextTypes, SupplierType } from "../../types/resolvers.types";
 import { createSupplierService, getSuppliersService, getSupplierByIdService } from "../services/supplier.services";
 import { checkAdminService } from "../services/user.services";

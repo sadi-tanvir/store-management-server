@@ -19,14 +19,25 @@ import "./db/db"
 import Schema from "./gql/schemas/index"
 import resolvers from "./gql/resolvers/index"
 
+// routes
+import userRoutes from "./express/routes/user.routes"
+import fileUploadRoutes from "./express/routes/fileUpload.routes"
 
 
 async function listen(port: number) {
   const app: Express = express()
   const httpServer = http.createServer(app)
 
+
   // middleware
   app.use(cors())
+  app.use(express.static('public'))
+
+  // router
+  app.use('/api/user', userRoutes)
+  app.use('/api/user', fileUploadRoutes)
+
+  // gql
   const context = ({ req }: { req: any }) => {
     const { authorization } = req.headers
     if (authorization) {

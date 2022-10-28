@@ -7,13 +7,13 @@ export default gql`
         users: [User!]!
         user(id: ID!): User!
         darkMode: Boolean!
-        deleteUserById(id: ID!): SimpleResponse
     }
 
     extend type Mutation {
         signUpUser(userData:UserSignUpInput!): UserResponse
         signInUser(userData:UserSignInInput!): UserResponse
         updateUserByAdmin(userData:updateUserByAdminInput!): SimpleResponse
+        deleteUserById(id: ID!): SimpleResponse
     }
 
     type UserResponse {

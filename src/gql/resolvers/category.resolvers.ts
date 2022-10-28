@@ -1,5 +1,5 @@
-import dotenv from "dotenv"
-dotenv.config()
+// import dotenv from "dotenv"
+// dotenv.config()
 import Category from "../../models/Category";
 import { CategoryType, ContextTypes } from "../../types/resolvers.types";
 import { checkAdminService } from "../services/user.services";
