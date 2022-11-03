@@ -15,7 +15,7 @@ export default gql`
         name: String!
         description: String
         unit: String
-        imageUrl: [String]
+        imageUrl: String
         price: Int
         quantity: Int
         status: String
@@ -36,7 +36,7 @@ export default gql`
         name: String!
         description: String
         unit: String
-        imageUrl: [String]
+        imageUrl: String
         price: Int
         quantity: Int
         status: String

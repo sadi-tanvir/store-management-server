@@ -15,7 +15,6 @@ export default gql`
         name: String!
         email: String!
         contactNumber: String!
-        tradeLicenseNumber: String
         presentAddress: String
         permanentAddress: String
         imageUrl: String
@@ -30,10 +29,9 @@ export default gql`
 
     type Supplier {
         _id: ID
-        name: String!
-        email: String!
-        contactNumber: String!
-        tradeLicenseNumber: String
+        name: String
+        email: String
+        contactNumber: String
         presentAddress: String
         permanentAddress: String
         imageUrl: String

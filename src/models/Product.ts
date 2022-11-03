@@ -6,7 +6,7 @@ export interface ProductType extends Document {
     name: string;
     description: string;
     unit: string;
-    imageUrl: string[];
+    imageUrl: string;
     category: { id: string; name: string; };
     brand: { id: string; name: string; };
 }
@@ -36,10 +36,9 @@ const productSchema = new Schema<ProductType>({
         }
     },
 
-    imageUrl: [{
-        type: String,
-        validate: [validator.isURL, "Please provide a valid URL"]
-    }],
+    imageUrl: {
+        type: String
+    },
 
     category: {
         id: {

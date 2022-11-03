@@ -9,7 +9,6 @@ export const createSupplierService = async (data: SupplierServiceType) => {
         name: data.name,
         email: data.email,
         contactNumber: data.contactNumber,
-        tradeLicenseNumber: data.tradeLicenseNumber,
         presentAddress: data.presentAddress,
         permanentAddress: data.permanentAddress,
         imageUrl: data.imageUrl,
@@ -32,7 +31,7 @@ export const getSuppliersService = async () => {
 
 
 // find all products service
-export const getSupplierByIdService = async (id:string) => {
+export const getSupplierByIdService = async (id: string) => {
     const product = await Supplier.findOne({ _id: new ObjectId(id) })
         .populate('brand.id');
 

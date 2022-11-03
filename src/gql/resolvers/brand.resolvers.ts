@@ -16,6 +16,16 @@ const brandResolver = {
 
             const brands = await Brand.find();
             return brands;
+        },
+        brandsWithReference: async (_: any, args: any, context: ContextTypes) => {
+            // checking admin
+            const isAdmin = await checkAdminService(context)
+            if (!isAdmin) throw new Error("You are not authorized to add product");
+
+            const brands = await Brand.find()
+                .populate("suppliers.id")
+                .populate("products")
+            return brands;
         }
     },
 

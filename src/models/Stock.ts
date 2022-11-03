@@ -21,8 +21,7 @@ const stockSchema = new Schema<StockSchemaType>({
     },
 
     description: {
-        type: String,
-        required: [true, "Description is required"],
+        type: String
     },
 
     unit: {
@@ -33,11 +32,18 @@ const stockSchema = new Schema<StockSchemaType>({
             message: "unit value can't be {VALUE} only kg, litre or pcs"
         }
     },
-
-    imageUrl: [{
+    status: {
+        type: String,
+        required: [true, "Status is required"],
+        enum: {
+            values: ["in-stock", "out-of-stock", "discontinued"],
+            message: "Status value can't be {VALUE} only in-stock, out-of-stock or discontinued"
+        }
+    },
+    imageUrl: {
         type: String,
         default: 'empty-product.png'
-    }],
+    },
 
     price: {
         type: Number,
@@ -67,14 +73,6 @@ const stockSchema = new Schema<StockSchemaType>({
         id: {
             type: Schema.Types.ObjectId,
             ref: "Category",
-        }
-    },
-    status: {
-        type: String,
-        required: [true, "Status is required"],
-        enum: {
-            values: ["in-stock", "out-of-stock", "discontinued"],
-            message: "Status value can't be {VALUE} only in-stock, out-of-stock or discontinued"
         }
     },
     sellCount: {

@@ -20,13 +20,13 @@ export interface UserSchemaType extends Document {
 export interface StockSchemaType extends Document {
     productId: any;
     name: string;
-    description: string;
+    description?: string;
     unit: string;
-    imageUrl: string[];
+    status: string;
+    imageUrl: string;
     price: number;
     quantity: number;
     category: any;
-    status: string;
     sellCount: number;
     brand: any;
     suppliedBy: any;
@@ -42,7 +42,6 @@ export interface SupplierSchemaType extends Document {
     name: string;
     email: string;
     contactNumber: string;
-    tradeLicenseNumber: string;
     presentAddress: string;
     permanentAddress: string;
     imageUrl: string;

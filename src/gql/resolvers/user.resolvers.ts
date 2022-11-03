@@ -17,13 +17,14 @@ const userResolver = {
             const users = await User.find();
             return users;
         },
-        user: async (_: any, args: { id: string }, context: ContextTypes) => {
+        userById: async (_: any, args: { id: string }, context: ContextTypes) => {
             const isAdmin = await checkAdminService(context)
             if (!isAdmin) throw new Error("You are not authorized to view this page");
 
             const user = await User.findOne({ _id: args.id });
             return user;
         },
+
         darkMode: async (_: any, args: any, context: ContextTypes) => {
             const user = await User.findOne({ email: context.email });
             if (!user) throw new Error("User not found");
@@ -37,7 +38,16 @@ const userResolver = {
             }
 
             return user.darkMode;
-        }
+        }, ownerProfile: async (_: any, args: any, context: ContextTypes) => {
+            // checking user existence
+            const owner = await User.findOne({ email: context.email });
+            if (!owner) throw new Error("The User doesn't exist");
+
+            return {
+                status: true,
+                owner
+            };
+        },
     },
 
     Mutation: {
@@ -89,8 +99,7 @@ const userResolver = {
 
             return {
                 status: true,
-                message: 'The User has been updated Successfully',
-                user: user
+                message: 'The User has been updated Successfully'
             }
         },
         deleteUserById: async (_: any, { id }: { id: string }, context: ContextTypes) => {
@@ -104,6 +113,16 @@ const userResolver = {
                 status: true,
                 message: "The User has been deleted successfully"
             };
+        },
+        updateOwnerProfile: async (_: any, { userData }: { userData: UserUpdateType }, context: ContextTypes) => {
+            // update user
+            const user = await updateUserByAdminService(userData)
+            if (!user) throw new Error("Failed to update a user");
+
+            return {
+                status: true,
+                message: 'The User has been updated Successfully'
+            }
         },
     }
 };

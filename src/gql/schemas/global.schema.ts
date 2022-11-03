@@ -28,7 +28,7 @@ export default gql`
     }
 
     type SupplierRef {
-        id: ID
+        id: Supplier
         name: String
     }
 `

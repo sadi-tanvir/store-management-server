@@ -15,7 +15,7 @@ export default gql`
         name: String!
         description: String
         unit: String!
-        imageUrl: [String]
+        imageUrl: String
         category: CategoryInputRef
         brand: BrandInputRef
     }
@@ -31,7 +31,7 @@ export default gql`
         name: String!
         description: String
         unit: String
-        imageUrl: [String]
+        imageUrl: String
         category: CategoryRef
         brand: BrandRef
     }

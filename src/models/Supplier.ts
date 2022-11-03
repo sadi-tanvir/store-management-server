@@ -24,7 +24,6 @@ const supplierSchema = new Schema<SupplierSchemaType>({
         type: String,
         required: [true, "Contact number is required"],
     },
-    tradeLicenseNumber: String,
     presentAddress: {
         type: String,
         trim: true,

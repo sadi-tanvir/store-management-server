@@ -4,8 +4,9 @@ import { gql } from 'apollo-server-express'
 export default gql`
     
     extend type Query {
+        ownerProfile(id: ID!): OwnerResponse!
         users: [User!]!
-        user(id: ID!): User!
+        userById(id: ID!): User!
         darkMode: Boolean!
     }
 
@@ -14,6 +15,7 @@ export default gql`
         signInUser(userData:UserSignInInput!): UserResponse
         updateUserByAdmin(userData:updateUserByAdminInput!): SimpleResponse
         deleteUserById(id: ID!): SimpleResponse
+        updateOwnerProfile(userData:updateOwnerProfileInput!): SimpleResponse
     }
 
     type UserResponse {
@@ -26,6 +28,11 @@ export default gql`
     type SimpleResponse {
         status: Boolean!
         message: String
+    }
+
+    type OwnerResponse {
+        status: Boolean
+        owner: User
     }
 
     type User {
@@ -73,6 +80,21 @@ export default gql`
         dateOfBirth: String!
         accountStatus: String!
     }
+
+    input updateOwnerProfileInput {
+        _id: ID!
+        firstName: String!
+        lastName: String!
+        email: String!
+        phone: String!
+        role: String!
+        gender: String!
+        currentAddress: String!
+        permanentAddress: String!
+        dateOfBirth: String!
+        accountStatus: String!
+    }
+
 
 
 `

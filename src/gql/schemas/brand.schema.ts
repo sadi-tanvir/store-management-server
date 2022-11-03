@@ -4,6 +4,7 @@ import { gql } from 'apollo-server-express'
 export default gql`
     extend type Query {
         brands: [Brand]
+        brandsWithReference: [Brand]
     }
 
     extend type Mutation {
@@ -44,25 +45,27 @@ export default gql`
         location: String
         status: String
         products: [Product]
-        suppliers: [Supplier]
+        suppliers: [SupplierRef]
     }
 
-    type Product {
-        name: String
-        description: String
-        unit: String
-        imageUrl: [String]
-        categories: ProductCategory
-    }
-
-    type Supplier {
-        name: String
-        email: String
-        brand: BrandRef 
-    }
-
-    type ProductCategory {
-        name: String
-        id: ID
-    }
 `
+
+
+// type Product {
+//     name: String
+//     description: String
+//     unit: String
+//     imageUrl: String
+//     categories: ProductCategory
+// }
+
+// type Supplier {
+//     name: String
+//     email: String
+//     brand: BrandRef
+// }
+
+// type ProductCategory {
+//     name: String
+//     id: ID
+// }
