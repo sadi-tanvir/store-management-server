@@ -53,6 +53,19 @@ const brandResolver = {
                 message: 'The brand has created successfully',
                 brand: brand
             }
+        },
+        deleteBrandById: async (_: any, { id }: { id: string }, context: ContextTypes) => {
+            // checking admin
+            const isAdmin = await checkAdminService(context)
+            if (!isAdmin) throw new Error("You are not authorized to delete a brand");
+
+            const brand = await Brand.findByIdAndDelete(id)
+            if (!brand) throw new Error("Failed to Delete a Brand.")
+
+            return {
+                status: true,
+                message: 'The brand has been deleted successfully',
+            }
         }
     }
 };

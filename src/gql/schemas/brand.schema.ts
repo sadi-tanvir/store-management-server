@@ -9,6 +9,7 @@ export default gql`
 
     extend type Mutation {
         createBrand(data:BrandInputData!): BrandResponse
+        deleteBrandById(id: ID!): SimpleResponse
     }
 
     input BrandInputData {

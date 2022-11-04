@@ -25,11 +25,6 @@ export default gql`
         token: String
     }
 
-    type SimpleResponse {
-        status: Boolean!
-        message: String
-    }
-
     type OwnerResponse {
         status: Boolean
         owner: User
