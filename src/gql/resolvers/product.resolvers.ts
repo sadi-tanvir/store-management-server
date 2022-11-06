@@ -3,6 +3,7 @@
 import { ContextTypes, ProductType } from "../../types/resolvers.types";
 import { checkAdminService } from "../services/user.services";
 import { createProductService, getProductByIdService, getProductsService } from "../services/product.services";
+import Product from "../../models/Product";
 
 
 
@@ -14,7 +15,9 @@ const productResolver = {
             if (!isAdmin) throw new Error("You are not authorized to add product");
 
             // find all products
-            const products = await getProductsService()
+            const products = await Product.find()
+                .populate('category.id')
+                .populate('brand.id');
             return products;
         },
         productById: async (_: any, { id }: { id: string }, context: ContextTypes) => {

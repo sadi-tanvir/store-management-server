@@ -5,6 +5,7 @@ export default gql`
     extend type Query {
         brands: [Brand]
         brandsWithReference: [Brand]
+        getBrandWithId(id: ID!): Brand
     }
 
     extend type Mutation {

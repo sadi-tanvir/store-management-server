@@ -13,8 +13,8 @@ export default gql`
     }
     
     type BrandRef {
-        name: String
         id: Brand
+        name: String
     }
 
     input CategoryInputRef {
@@ -35,5 +35,7 @@ export default gql`
     type SupplierRef {
         id: Supplier
         name: String
+        email: String
+        phone: String
     }
 `

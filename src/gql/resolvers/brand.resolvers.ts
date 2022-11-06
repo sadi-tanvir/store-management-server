@@ -26,6 +26,16 @@ const brandResolver = {
                 .populate("suppliers.id")
                 .populate("products")
             return brands;
+        },
+        getBrandWithId: async (_: any, args: any, context: ContextTypes) => {
+            // checking admin
+            const isAdmin = await checkAdminService(context)
+            if (!isAdmin) throw new Error("You are not authorized to get brand");
+
+            const brand = await Brand.findOne({ _id: args.id })
+                .populate("suppliers.id")
+                .populate("products")
+            return brand;
         }
     },
 

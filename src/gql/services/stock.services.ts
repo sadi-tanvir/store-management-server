@@ -34,7 +34,9 @@ export const createStockService = async (data: StockServiceType) => {
 
 // find all stocks service
 export const getStocksService = async () => {
-    const stocks = await Stock.find().populate('productId')
+    const stocks = await Stock.find()
+        .populate('productId')
+        .populate('brand.id')
 
     return stocks;
 }
