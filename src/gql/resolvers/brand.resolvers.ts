@@ -76,6 +76,19 @@ const brandResolver = {
                 status: true,
                 message: 'The brand has been deleted successfully',
             }
+        },
+        updateBrandById: async (_: any, args: any, context: ContextTypes) => {
+            // checking admin
+            const isAdmin = await checkAdminService(context)
+            if (!isAdmin) throw new Error("You are not authorized to update brand");
+
+            const brand = await Brand.findOneAndUpdate({ _id: args.id }, args.data)
+            if (!brand) throw new Error("Failed to Update the Brand.")
+
+            return {
+                status: true,
+                message: 'The brand has been updated successfully'
+            };
         }
     }
 };

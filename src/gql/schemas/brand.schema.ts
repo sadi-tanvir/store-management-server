@@ -11,6 +11,7 @@ export default gql`
     extend type Mutation {
         createBrand(data:BrandInputData!): BrandResponse
         deleteBrandById(id: ID!): SimpleResponse
+        updateBrandById(id: ID!, data:BrandUpdateInputData!): BrandResponse
     }
 
     input BrandInputData {
@@ -20,6 +21,18 @@ export default gql`
         phone: String
         website: String
         location: String
+        products: [ID]
+        suppliers: [SupplierInputData]
+    }
+
+    input BrandUpdateInputData {
+        name: String
+        description: String
+        email: String
+        phone: String
+        website: String
+        location: String
+        status: String
         products: [ID]
         suppliers: [SupplierInputData]
     }
