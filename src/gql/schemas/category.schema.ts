@@ -8,6 +8,7 @@ export default gql`
 
     extend type Mutation {
         createCategory(data:CategoryInputData!): CategoryResponse
+        updateCategoryById(id: ID!, data:CategoryInputData!): CategoryResponse
     }
 
     input CategoryInputData {

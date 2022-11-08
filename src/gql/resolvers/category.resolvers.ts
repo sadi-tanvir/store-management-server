@@ -37,6 +37,19 @@ const categoryResolver = {
                 message: 'The category has created successfully',
                 category: category
             }
+        },
+        updateCategoryById: async (_: any, args: any, context: ContextTypes) => {
+            // checking admin
+            const isAdmin = await checkAdminService(context)
+            if (!isAdmin) throw new Error("You are not authorized to update category");
+
+            const category = await Category.findOneAndUpdate({ _id: args.id }, args.data)
+            if (!category) throw new Error("Failed to Update the Category.")
+
+            return {
+                status: true,
+                message: 'The category has been updated successfully'
+            };
         }
     }
 };
