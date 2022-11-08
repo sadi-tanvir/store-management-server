@@ -51,7 +51,7 @@ const productResolver = {
         updateProductById: async (_: any, args: any, context: ContextTypes) => {
             // checking admin
             const isAdmin = await checkAdminService(context)
-            if (!isAdmin) throw new Error("You are not authorized to update brand");
+            if (!isAdmin) throw new Error("You are not authorized to update product");
 
             const product = await Product.findOneAndUpdate({ _id: args.id }, args.data)
             if (!product) throw new Error("Failed to Update the Product.")
@@ -60,7 +60,20 @@ const productResolver = {
                 status: true,
                 message: 'The product has been updated successfully'
             };
-        }
+        },
+        deleteProductById: async (_: any, { id }: { id: string }, context: ContextTypes) => {
+            // checking admin
+            const isAdmin = await checkAdminService(context)
+            if (!isAdmin) throw new Error("You are not authorized to delete product");
+
+            const product = await Product.findByIdAndDelete(id)
+            if (!product) throw new Error("Failed to Delete a Product.")
+
+            return {
+                status: true,
+                message: 'The product has been deleted successfully',
+            }
+        },
     }
 };
 
