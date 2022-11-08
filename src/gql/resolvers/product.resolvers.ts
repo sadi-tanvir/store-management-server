@@ -47,6 +47,19 @@ const productResolver = {
                 message: 'The Product has created successfully',
                 product: product
             }
+        },
+        updateProductById: async (_: any, args: any, context: ContextTypes) => {
+            // checking admin
+            const isAdmin = await checkAdminService(context)
+            if (!isAdmin) throw new Error("You are not authorized to update brand");
+
+            const product = await Product.findOneAndUpdate({ _id: args.id }, args.data)
+            if (!product) throw new Error("Failed to Update the Product.")
+
+            return {
+                status: true,
+                message: 'The product has been updated successfully'
+            };
         }
     }
 };

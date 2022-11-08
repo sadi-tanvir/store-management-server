@@ -9,6 +9,7 @@ export default gql`
 
     extend type Mutation {
         createProduct(data: ProductInputData!): ProductResponse
+        updateProductById(id: ID!, data:ProductInputData!): ProductResponse
     }
 
     input ProductInputData {
@@ -43,3 +44,4 @@ export default gql`
         brand: BrandRef 
     }
 `
+        // deleteBrandById(id: ID!): ProductResponse
