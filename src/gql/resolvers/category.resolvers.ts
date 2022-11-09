@@ -38,7 +38,7 @@ const categoryResolver = {
                 category: category
             }
         },
-        deleteBrandById: async (_: any, { id }: { id: string }, context: ContextTypes) => {
+        deleteCategoryById: async (_: any, { id }: { id: string }, context: ContextTypes) => {
             // checking admin
             const isAdmin = await checkAdminService(context)
             if (!isAdmin) throw new Error("You are not authorized to delete a category");
