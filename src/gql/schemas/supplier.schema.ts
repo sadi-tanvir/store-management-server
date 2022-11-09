@@ -10,6 +10,7 @@ export default gql`
     extend type Mutation {
         createSupplier(data:SupplierInput!): SupplierResponse
         deleteSupplierById(id: ID!): SupplierResponse
+        updateSupplierById(id: ID!, data:SupplierUpdateInput!): SupplierResponse
     }
 
     input SupplierInput {
@@ -19,6 +20,17 @@ export default gql`
         presentAddress: String
         permanentAddress: String
         imageUrl: String
+        brand: BrandInputRef
+    }
+
+    input SupplierUpdateInput {
+        name: String!
+        email: String!
+        contactNumber: String
+        presentAddress: String
+        permanentAddress: String
+        imageUrl: String
+        status: String
         brand: BrandInputRef
     }
 

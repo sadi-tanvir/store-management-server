@@ -59,6 +59,19 @@ const supplierResolver = {
             status: true,
             message: 'The supplier has been deleted successfully',
         }
+    },
+    updateSupplierById: async (_: any, args: any, context: ContextTypes) => {
+        // checking admin
+        const isAdmin = await checkAdminService(context)
+        if (!isAdmin) throw new Error("You are not authorized to update supplier");
+
+        const supplier = await Supplier.findOneAndUpdate({ _id: args.id }, args.data)
+        if (!supplier) throw new Error("Failed to Update the Supplier.")
+
+        return {
+            status: true,
+            message: 'The supplier has been updated successfully'
+        };
     }
 };
 
