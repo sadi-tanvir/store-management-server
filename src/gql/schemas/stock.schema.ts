@@ -8,7 +8,8 @@ export default gql`
 
     extend type Mutation {
         createStock(data: StockInputData!): StockResponse
-        updateStockQuantity(id:ID!, data: StockUpdateInfo!):StockResponse
+        updateStockQuantity(id:ID!, data: StockUpdateInfo!):SimpleResponse
+        deleteStockById(id: ID!): SimpleResponse
     }
 
     input StockInputData {
