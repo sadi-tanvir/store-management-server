@@ -8,6 +8,7 @@ export default gql`
 
     extend type Mutation {
         createStock(data: StockInputData!): StockResponse
+        updateStockQuantity(id:ID!, data: StockUpdateInfo!):StockResponse
     }
 
     input StockInputData {
@@ -22,6 +23,10 @@ export default gql`
         category: CategoryInputRef
         brand: BrandInputRef
         suppliedBy: SupplierInputRef
+    }
+
+    input StockUpdateInfo { 
+        reference: String!
     }
 
     type StockResponse {

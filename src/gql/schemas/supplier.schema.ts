@@ -48,6 +48,7 @@ export default gql`
         presentAddress: String
         permanentAddress: String
         imageUrl: String
+        status: String
         brand: BrandRef
     }
 `

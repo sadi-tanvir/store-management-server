@@ -45,33 +45,33 @@ const supplierResolver = {
                 message: 'The supplier has created successfully',
                 supplier: supplier
             }
+        },
+        deleteSupplierById: async (_: any, { id }: { id: string }, context: ContextTypes) => {
+            // checking admin
+            const isAdmin = await checkAdminService(context)
+            if (!isAdmin) throw new Error("You are not authorized to delete a supplier");
+
+            const supplier = await Supplier.findByIdAndDelete(id)
+            if (!supplier) throw new Error("Failed to Delete a Supplier.")
+
+            return {
+                status: true,
+                message: 'The supplier has been deleted successfully',
+            }
+        },
+        updateSupplierById: async (_: any, args: any, context: ContextTypes) => {
+            // checking admin
+            const isAdmin = await checkAdminService(context)
+            if (!isAdmin) throw new Error("You are not authorized to update supplier");
+
+            const supplier = await Supplier.findOneAndUpdate({ _id: args.id }, args.data)
+            if (!supplier) throw new Error("Failed to Update the Supplier.")
+
+            return {
+                status: true,
+                message: 'The supplier has been updated successfully'
+            }
         }
-    },
-    deleteSupplierById: async (_: any, { id }: { id: string }, context: ContextTypes) => {
-        // checking admin
-        const isAdmin = await checkAdminService(context)
-        if (!isAdmin) throw new Error("You are not authorized to delete a supplier");
-
-        const supplier = await Supplier.findByIdAndDelete(id)
-        if (!supplier) throw new Error("Failed to Delete a Supplier.")
-
-        return {
-            status: true,
-            message: 'The supplier has been deleted successfully',
-        }
-    },
-    updateSupplierById: async (_: any, args: any, context: ContextTypes) => {
-        // checking admin
-        const isAdmin = await checkAdminService(context)
-        if (!isAdmin) throw new Error("You are not authorized to update supplier");
-
-        const supplier = await Supplier.findOneAndUpdate({ _id: args.id }, args.data)
-        if (!supplier) throw new Error("Failed to Update the Supplier.")
-
-        return {
-            status: true,
-            message: 'The supplier has been updated successfully'
-        };
     }
 };
 
