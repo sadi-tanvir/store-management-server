@@ -10,6 +10,7 @@ export default gql`
         createStock(data: StockInputData!): StockResponse
         updateStockQuantity(id:ID!, data: StockUpdateInfo!):SimpleResponse
         deleteStockById(id: ID!): SimpleResponse
+        updateStockById(id:ID!, data: StockInputData!):StockResponse
     }
 
     input StockInputData {

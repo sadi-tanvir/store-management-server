@@ -72,6 +72,19 @@ const stockResolver = {
                 status: true,
                 message: 'The stock has been deleted successfully',
             }
+        },
+        updateStockById: async (_: any, args: any, context: ContextTypes) => {
+            // checking admin
+            const isAdmin = await checkAdminService(context)
+            if (!isAdmin) throw new Error("You are not authorized to update stock");
+
+            const stock = await Stock.findOneAndUpdate({ _id: args.id }, args.data)
+            if (!stock) throw new Error("Failed to Update the stock.")
+
+            return {
+                status: true,
+                message: 'The stock has been updated successfully'
+            };
         }
     }
 };
