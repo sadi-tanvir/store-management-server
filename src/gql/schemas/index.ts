@@ -6,6 +6,7 @@ import categorySchema from "./category.schema"
 import productSchema from "./product.schema"
 import supplierSchema from "./supplier.schema"
 import stockSchema from "./stock.schema"
+import orderSchema from './order.schema'
 
 const rootSchema = gql`
     type Query {
@@ -24,4 +25,5 @@ export default [
     productSchema,
     supplierSchema,
     stockSchema,
+    orderSchema
 ]

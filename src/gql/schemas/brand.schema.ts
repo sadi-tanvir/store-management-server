@@ -64,23 +64,3 @@ export default gql`
     }
 
 `
-
-
-// type Product {
-//     name: String
-//     description: String
-//     unit: String
-//     imageUrl: String
-//     categories: ProductCategory
-// }
-
-// type Supplier {
-//     name: String
-//     email: String
-//     brand: BrandRef
-// }
-
-// type ProductCategory {
-//     name: String
-//     id: ID
-// }

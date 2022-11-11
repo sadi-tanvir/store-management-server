@@ -1,5 +1,3 @@
-// import dotenv from "dotenv"
-// dotenv.config()
 import Brand from "../../models/Brand";
 import { BrandType, ContextTypes, UserType } from "../../types/resolvers.types";
 import { checkAdminService, createUserService, isUserExistService } from "../services/user.services";

@@ -2,7 +2,7 @@
 // dotenv.config()
 import { ContextTypes, StockType } from "../../types/resolvers.types";
 import { checkAdminService } from "../services/user.services";
-import { createStockService, getStocksService } from "../services/stock.services";
+import { createStockService, getStocksService, getStocksWithDetailsService } from "../services/stock.services";
 import Stock from "../../models/Stock";
 
 
@@ -16,7 +16,17 @@ const stockResolver = {
             // find all stocks
             const stocks = await getStocksService()
             return stocks;
-        }
+        },
+        getStocksWithDetails: async (_: any, args: any, context: ContextTypes) => {
+            // checking admin
+            const isAdmin = await checkAdminService(context)
+            if (!isAdmin) throw new Error("You are not authorized to view stocks");
+
+            // find all stocks
+            const stocks = await getStocksWithDetailsService()
+            return stocks;
+        },
+
     },
 
     Mutation: {

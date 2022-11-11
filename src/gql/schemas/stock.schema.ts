@@ -4,13 +4,14 @@ import { gql } from 'apollo-server-express'
 export default gql`
     extend type Query {
         stocks: [Stock]
+        getStocksWithDetails: [Stock]
     }
 
     extend type Mutation {
         createStock(data: StockInputData!): StockResponse
         updateStockQuantity(id:ID!, data: StockUpdateInfo!):SimpleResponse
         deleteStockById(id: ID!): SimpleResponse
-        updateStockById(id:ID!, data: StockInputData!):StockResponse
+        updateStockById(id:ID!, data: StockUpdateInputData!):StockResponse
     }
 
     input StockInputData {
@@ -21,6 +22,20 @@ export default gql`
         imageUrl: String
         price: Int
         quantity: Int
+        status: String
+        category: CategoryInputRef
+        brand: BrandInputRef
+        suppliedBy: SupplierInputRef
+    }
+
+    input StockUpdateInputData {
+        name: String!
+        description: String
+        unit: String
+        imageUrl: String
+        price: Int
+        quantity: Int
+        sellCount: Int
         status: String
         category: CategoryInputRef
         brand: BrandInputRef
