@@ -2,6 +2,10 @@ import { gql } from 'apollo-server-express'
 
 
 export default gql`
+    extend type Query {
+        orders: [Order]
+    }
+
     extend type Mutation {
         createOrder(data:OrderInputData!): OrderResponse
     }

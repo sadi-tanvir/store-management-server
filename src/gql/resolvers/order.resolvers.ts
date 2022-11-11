@@ -22,6 +22,18 @@ export type OrderType = {
 }
 
 const brandResolver = {
+    Query: {
+        orders: async (_: any, args: any, context: ContextTypes) => {
+            // checking admin
+            const isAdmin = await checkAdminService(context)
+            if (!isAdmin) throw new Error("You are not authorized to get orders");
+
+            const orders = await Order.find()
+                .populate("userId")
+                .populate("products.stockId")
+            return orders;
+        }
+    },
 
 
     Mutation: {
