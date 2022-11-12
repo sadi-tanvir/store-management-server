@@ -52,8 +52,8 @@ const productSchema = new Schema<OrderType>({
     },
     paymentStatus: {
         type: String,
-        enum: ["pending", "paid"],
-        default: "pending"
+        enum: ["unpaid", "paid"],
+        default: "unpaid"
     },
     trxId: {
         type: String,

@@ -8,6 +8,7 @@ export default gql`
 
     extend type Mutation {
         createOrder(data:OrderInputData!): OrderResponse
+        deleteOrderById(id: ID!): SimpleResponse
     }
 
     input OrderInputData {
@@ -50,6 +51,7 @@ export default gql`
     }
 
     type CartProductType {
+        _id: ID
         stockId: Stock
         qty: Int!
         price: Int!

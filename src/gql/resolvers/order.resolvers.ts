@@ -21,7 +21,7 @@ export type OrderType = {
     }
 }
 
-const brandResolver = {
+const orderResolver = {
     Query: {
         orders: async (_: any, args: any, context: ContextTypes) => {
             // checking admin
@@ -58,8 +58,21 @@ const brandResolver = {
                 message: 'The order has created successfully',
                 order: order
             }
-        }
+        },
+        deleteBrandById: async (_: any, { id }: { id: string }, context: ContextTypes) => {
+            // checking admin
+            const isAdmin = await checkAdminService(context)
+            if (!isAdmin) throw new Error("You are not authorized to delete a order");
+
+            const order = await Brand.findByIdAndDelete(id)
+            if (!order) throw new Error("Failed to Delete a Order.")
+
+            return {
+                status: true,
+                message: 'The order has been deleted successfully',
+            }
+        },
     }
 };
 
-export default brandResolver;
+export default orderResolver;
