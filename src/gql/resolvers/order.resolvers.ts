@@ -59,12 +59,12 @@ const orderResolver = {
                 order: order
             }
         },
-        deleteBrandById: async (_: any, { id }: { id: string }, context: ContextTypes) => {
+        deleteOrderById: async (_: any, { id }: { id: string }, context: ContextTypes) => {
             // checking admin
             const isAdmin = await checkAdminService(context)
             if (!isAdmin) throw new Error("You are not authorized to delete a order");
 
-            const order = await Brand.findByIdAndDelete(id)
+            const order = await Order.findByIdAndDelete(id)
             if (!order) throw new Error("Failed to Delete a Order.")
 
             return {
@@ -72,6 +72,19 @@ const orderResolver = {
                 message: 'The order has been deleted successfully',
             }
         },
+        updateOrderById: async (_: any, args: any, context: ContextTypes) => {
+            // checking admin
+            const isAdmin = await checkAdminService(context)
+            if (!isAdmin) throw new Error("You are not authorized to update order");
+
+            const order = await Order.findOneAndUpdate({ _id: args.id }, args.data)
+            if (!order) throw new Error("Failed to Update the Order.")
+
+            return {
+                status: true,
+                message: 'The order has been updated successfully'
+            };
+        }
     }
 };
 

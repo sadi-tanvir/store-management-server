@@ -9,6 +9,7 @@ export default gql`
     extend type Mutation {
         createOrder(data:OrderInputData!): OrderResponse
         deleteOrderById(id: ID!): SimpleResponse
+        updateOrderById(id: ID!, data:OrderUpdateInputData!): SimpleResponse
     }
 
     input OrderInputData {
@@ -18,6 +19,12 @@ export default gql`
         address: String!
         products: [CartProductInput]
         amount: Int!
+    }
+
+    input OrderUpdateInputData {
+        paymentStatus: String
+        trxId: String
+        orderStatus: String
     }
 
     input CartProductInput {
