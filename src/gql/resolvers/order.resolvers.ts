@@ -5,6 +5,7 @@ import { checkAdminService, createUserService, isUserExistService } from "../ser
 
 
 export type OrderType = {
+    batchRef: string,
     userId: string;
     email: string;
     phone: string
@@ -24,13 +25,11 @@ export type OrderType = {
 const orderResolver = {
     Query: {
         orders: async (_: any, args: any, context: ContextTypes) => {
-            // checking admin
-            const isAdmin = await checkAdminService(context)
-            if (!isAdmin) throw new Error("You are not authorized to get orders");
-
             const orders = await Order.find()
                 .populate("userId")
                 .populate("products.stockId")
+                .populate("batchRef")
+                .populate("batchRef.userId")
             return orders;
         }
     },
@@ -38,12 +37,9 @@ const orderResolver = {
 
     Mutation: {
         createOrder: async (_: any, { data }: { data: OrderType }, context: ContextTypes) => {
-            // checking admin
-            const isAdmin = await checkAdminService(context)
-            if (!isAdmin) throw new Error("You are not authorized to add product");
-
             // create order
             const order = await Order.create({
+                batchRef: data.batchRef,
                 userId: data.userId,
                 products: data.products,
                 email: data.email,
@@ -60,10 +56,6 @@ const orderResolver = {
             }
         },
         deleteOrderById: async (_: any, { id }: { id: string }, context: ContextTypes) => {
-            // checking admin
-            const isAdmin = await checkAdminService(context)
-            if (!isAdmin) throw new Error("You are not authorized to delete a order");
-
             const order = await Order.findByIdAndDelete(id)
             if (!order) throw new Error("Failed to Delete a Order.")
 
@@ -73,10 +65,6 @@ const orderResolver = {
             }
         },
         updateOrderById: async (_: any, args: any, context: ContextTypes) => {
-            // checking admin
-            const isAdmin = await checkAdminService(context)
-            if (!isAdmin) throw new Error("You are not authorized to update order");
-
             const order = await Order.findOneAndUpdate({ _id: args.id }, args.data)
             if (!order) throw new Error("Failed to Update the Order.")
 

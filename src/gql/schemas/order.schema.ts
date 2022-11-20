@@ -13,6 +13,7 @@ export default gql`
     }
 
     input OrderInputData {
+        batchRef: String!
         userId: String!
         email: String!
         phone: String
@@ -22,6 +23,7 @@ export default gql`
     }
 
     input OrderUpdateInputData {
+        batchRef: String
         paymentStatus: String
         trxId: String
         orderStatus: String
@@ -46,6 +48,7 @@ export default gql`
 
     type Order {
         _id: ID
+        batchRef: Batch
         userId: User
         products: [CartProductType]
         email: String

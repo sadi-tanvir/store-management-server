@@ -4,6 +4,7 @@ import { Schema, model } from "mongoose";
 
 
 export interface OrderType extends Document {
+    batchRef: any;
     userId: any;
     products: any;
     email: string;
@@ -16,6 +17,11 @@ export interface OrderType extends Document {
 };
 
 const productSchema = new Schema<OrderType>({
+    batchRef: {
+        type: Schema.Types.ObjectId,
+        ref: 'Batch',
+        required: true
+    },
     userId: {
         type: Schema.Types.ObjectId,
         ref: "User",

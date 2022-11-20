@@ -34,7 +34,7 @@ export default gql`
         _id: ID
         firstName: String
         lastName: String
-        email: String!
+        email: String
         password: String
         image: String
         phone: String

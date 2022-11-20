@@ -1,12 +1,14 @@
-import { gql } from 'apollo-server-express'
-import globalSchema from './global.schema'
-import userSchema from "./user.schema"
-import brandSchema from "./brand.schema"
-import categorySchema from "./category.schema"
-import productSchema from "./product.schema"
-import supplierSchema from "./supplier.schema"
-import stockSchema from "./stock.schema"
-import orderSchema from './order.schema'
+import { gql } from 'apollo-server-express';
+import globalSchema from './global.schema';
+import userSchema from "./user.schema";
+import brandSchema from "./brand.schema";
+import categorySchema from "./category.schema";
+import productSchema from "./product.schema";
+import supplierSchema from "./supplier.schema";
+import stockSchema from "./stock.schema";
+import orderSchema from './order.schema';
+import batchSchema from "./batch.schema";
+
 
 const rootSchema = gql`
     type Query {
@@ -25,5 +27,6 @@ export default [
     productSchema,
     supplierSchema,
     stockSchema,
-    orderSchema
+    orderSchema,
+    batchSchema
 ]

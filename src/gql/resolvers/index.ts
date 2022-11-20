@@ -5,6 +5,7 @@ import productResolver from "./product.resolvers";
 import supplierResolver from "./supplier.resolvers";
 import stockResolver from "./stock.resolvers";
 import orderResolver from "./order.resolvers";
+import batchResolver from "./batch.resolvers";
 
 
 
@@ -15,5 +16,6 @@ export default [
     productResolver,
     supplierResolver,
     stockResolver,
-    orderResolver
+    orderResolver,
+    batchResolver,
 ]

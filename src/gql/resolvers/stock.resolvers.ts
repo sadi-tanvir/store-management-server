@@ -9,10 +9,6 @@ import Stock from "../../models/Stock";
 const stockResolver = {
     Query: {
         stocks: async (_: any, args: any, context: ContextTypes) => {
-            // checking admin
-            const isAdmin = await checkAdminService(context)
-            if (!isAdmin) throw new Error("You are not authorized to view stocks");
-
             // find all stocks
             const stocks = await getStocksService()
             return stocks;
@@ -46,10 +42,6 @@ const stockResolver = {
             }
         },
         updateStockQuantity: async (_: any, { id, data }: { id: string; data: { reference: string; } }, context: ContextTypes) => {
-            // checking admin
-            const isAdmin = await checkAdminService(context)
-            if (!isAdmin) throw new Error("You are not authorized to add product");
-
             // update stock quantity
             if (data.reference === 'increase') {
                 const stock = await Stock.findOne({ _id: id })
