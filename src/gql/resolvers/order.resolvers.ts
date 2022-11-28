@@ -26,10 +26,17 @@ const orderResolver = {
     Query: {
         orders: async (_: any, args: any, context: ContextTypes) => {
             const orders = await Order.find()
+                .sort({ orderStatus: -1, paymentStatus: -1 })
                 .populate("userId")
                 .populate("products.stockId")
                 .populate("batchRef")
-                .populate("batchRef.userId")
+            return orders;
+        },
+        getOrdersByBatchAndUserId: async (_: any, args: { batchId: string; userId: string; }, context: ContextTypes) => {
+            const orders = await Order.find({ batchRef: args.batchId, userId: args.userId })
+                .populate("userId")
+                .populate("products.stockId")
+                .populate("batchRef")
             return orders;
         }
     },

@@ -17,7 +17,6 @@ const stockSchema = new Schema<StockSchemaType>({
         lowercase: true,
         trim: true,
         minLength: [3, "Name must be at least 3 characters long"],
-        maxLength: [50, "Name must be at most 50 characters long"]
     },
 
     description: {

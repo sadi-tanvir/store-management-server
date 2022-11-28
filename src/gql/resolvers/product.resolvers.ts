@@ -36,6 +36,12 @@ const productResolver = {
             const isAdmin = await checkAdminService(context)
             if (!isAdmin) throw new Error("You are not authorized to add product");
 
+            // is product already exist?
+            const isExistProduct = await Product.findOne({ name: data.name, 'brand.name': data.brand.name })
+            console.log('isExistProduct', isExistProduct);
+
+            if (isExistProduct) throw new Error("The Product already exist");
+
             // create product
             const product = await createProductService(data)
             if (!product) throw new Error("Failed to Create a Product.")

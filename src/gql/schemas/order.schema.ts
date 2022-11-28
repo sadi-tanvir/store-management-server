@@ -4,6 +4,7 @@ import { gql } from 'apollo-server-express'
 export default gql`
     extend type Query {
         orders: [Order]
+        getOrdersByBatchAndUserId(batchId: ID!, userId: ID!): [Order]
     }
 
     extend type Mutation {

@@ -13,6 +13,11 @@ const stockResolver = {
             const stocks = await getStocksService()
             return stocks;
         },
+        getStocksByCategory: async (_: any, { category }: { category: string }, context: ContextTypes) => {
+            // find stocks by category
+            const stocks = await Stock.find({ 'category.name': category })
+            return stocks;
+        },
         getStocksWithDetails: async (_: any, args: any, context: ContextTypes) => {
             // checking admin
             const isAdmin = await checkAdminService(context)
@@ -30,6 +35,12 @@ const stockResolver = {
             // checking admin
             const isAdmin = await checkAdminService(context)
             if (!isAdmin) throw new Error("You are not authorized to add product");
+
+            // is stock already exist?
+            const isExistStock = await Stock.findOne({ name: data.name, 'brand.name': data.brand.name })
+            console.log(isExistStock);
+
+            if (isExistStock) throw new Error("The Stock already exist");
 
             // create stock
             const stock = await createStockService(data)

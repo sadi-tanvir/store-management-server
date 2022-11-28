@@ -14,13 +14,22 @@ export type BatchType = {
 
 const batchResolver = {
     Query: {
-        getAllBatchesRef: async (_: any, args: any, context: ContextTypes) => {
+        getAllBatchesWithRef: async (_: any, args: any, context: ContextTypes) => {
             // checking admin
             const isAdmin = await checkAdminService(context)
             if (!isAdmin) throw new Error("You are not authorized to get batches");
 
             const batches = await Batch.find()
                 .populate("userId")
+            return batches;
+        },
+        getAllOpenBatches: async (_: any, args: any, context: ContextTypes) => {
+            // checking admin
+            const isAdmin = await checkAdminService(context)
+            if (!isAdmin) throw new Error("You are not authorized to get batches");
+
+            const batches = await Batch.find({ status: 'open' })
+                .populate("userId").sort({ createdAt: 1 })
             return batches;
         },
         getBatchesByUserRef: async (_: any, { userId }: { userId: string; }, context: ContextTypes) => {
@@ -40,6 +49,15 @@ const batchResolver = {
             const batches = await Batch.findOne({ userId, status: "open" })
                 .populate("userId").sort({ batchNo: -1, createdAt: -1 })
             return batches;
+        },
+        getBatchById: async (_: any, { batchId }: { batchId: string; }, context: ContextTypes) => {
+            // checking admin
+            const isAdmin = await checkAdminService(context)
+            if (!isAdmin) throw new Error("You are not authorized to get batches");
+
+            const batch = await Batch.findOne({ _id: batchId })
+                .populate("userId")
+            return batch;
         },
     },
     Mutation: {

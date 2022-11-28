@@ -10,7 +10,8 @@ const supplierSchema = new Schema<SupplierSchemaType>({
         trim: true,
         maxLength: [100, "your name is too long, please provide your name between 4 to 100 characters"],
         minlength: [4, "your name is too short, please provide your name between 4 to 100 characters"],
-        lowercase: true
+        lowercase: true,
+        unique: true
     },
     email: {
         type: String,
@@ -44,11 +45,9 @@ const supplierSchema = new Schema<SupplierSchemaType>({
         name: {
             type: String,
             trim: true,
-            required: true
         },
         id: {
             type: Schema.Types.ObjectId,
-            required: true,
             ref: 'Brand'
         }
     },

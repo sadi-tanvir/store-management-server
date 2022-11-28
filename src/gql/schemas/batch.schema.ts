@@ -3,9 +3,11 @@ import { gql } from 'apollo-server-express'
 
 export default gql`
     extend type Query {
-        getAllBatchesRef: [Batch]
+        getAllBatchesWithRef: [Batch]
+        getAllOpenBatches: [Batch]
         getBatchesByUserRef(userId: ID!): [Batch]
         getOpenBatchByUserRef(userId: ID!): Batch
+        getBatchById(batchId: ID!): Batch
     }
 
     extend type Mutation {
@@ -32,6 +34,8 @@ export default gql`
         batchNo: String
         previousAmount: Int
         status: String
+        createdAt: String
+        updatedAt: String
     }
 
 `

@@ -13,7 +13,7 @@ export const createSupplierService = async (data: SupplierServiceType) => {
         permanentAddress: data.permanentAddress,
         imageUrl: data.imageUrl,
         brand: {
-            id: new ObjectId(data.brand.id),
+            id: data.brand.id ? new ObjectId(data.brand.id) : new ObjectId('637daf908b9eee9fe47d9885'),
             name: data.brand.name
         }
     })
