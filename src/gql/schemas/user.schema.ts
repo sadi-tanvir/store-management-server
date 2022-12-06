@@ -16,6 +16,7 @@ export default gql`
         updateUserByAdmin(userData:updateUserByAdminInput!): SimpleResponse
         deleteUserById(id: ID!): SimpleResponse
         updateOwnerProfile(userData:updateOwnerProfileInput!): SimpleResponse
+        changeUserPassword(id: ID!, data:UserPasswordInput!): SimpleResponse
     }
 
     type UserResponse {
@@ -88,6 +89,11 @@ export default gql`
         permanentAddress: String!
         dateOfBirth: String!
         accountStatus: String!
+    }
+
+    input UserPasswordInput {
+        oldPassword: String!
+        newPassword: String!
     }
 
 

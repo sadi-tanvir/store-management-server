@@ -117,11 +117,33 @@ const userResolver = {
         updateOwnerProfile: async (_: any, { userData }: { userData: UserUpdateType }, context: ContextTypes) => {
             // update user
             const user = await updateUserByAdminService(userData)
-            if (!user) throw new Error("Failed to update a user");
+            if (!user) throw new Error("Failed to update the user");
 
             return {
                 status: true,
                 message: 'The User has been updated Successfully'
+            }
+        },
+        changeUserPassword: async (_: any, { id, data }: { id: string; data: { oldPassword: string; newPassword: string; } }, context: ContextTypes) => {
+            const user = await User.findOne({ _id: id });
+            if (!user) throw new Error("User not found");
+
+            const isPasswordMatch = bcrypt.compareSync(data.oldPassword, user.password);
+            if (!isPasswordMatch) throw new Error("The Password doesn't match");
+
+            // update password
+            var salt = bcrypt.genSaltSync(10);
+            var hashedPassword = bcrypt.hashSync(data.newPassword, salt);
+            const updatePassword = await User.findOneAndUpdate(
+                { _id: user._id },
+                { $set: { password: hashedPassword } },
+                { new: true, runValidators: true }
+            );
+            if (!updatePassword) throw new Error("Failed to update the password");
+
+            return {
+                status: true,
+                message: 'The Password has been updated Successfully'
             }
         },
     }
