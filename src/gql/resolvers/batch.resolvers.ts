@@ -33,10 +33,6 @@ const batchResolver = {
             return batches;
         },
         getBatchesByUserRef: async (_: any, { userId }: { userId: string; }, context: ContextTypes) => {
-            // checking admin
-            const isAdmin = await checkAdminService(context)
-            if (!isAdmin) throw new Error("You are not authorized to get batches");
-
             const batches = await Batch.find({ userId })
                 .populate("userId").sort({ batchNo: -1, createdAt: -1 })
             return batches;

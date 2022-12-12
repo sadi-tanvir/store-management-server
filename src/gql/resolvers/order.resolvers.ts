@@ -25,6 +25,10 @@ export type OrderType = {
 const orderResolver = {
     Query: {
         orders: async (_: any, args: any, context: ContextTypes) => {
+            // checking admin
+            const isAdmin = await checkAdminService(context)
+            if (!isAdmin) throw new Error("You are not authorized to add product");
+
             const orders = await Order.find()
                 .sort({ orderStatus: -1, paymentStatus: -1 })
                 .populate("userId")
@@ -34,6 +38,13 @@ const orderResolver = {
         },
         getOrdersByBatchAndUserId: async (_: any, args: { batchId: string; userId: string; }, context: ContextTypes) => {
             const orders = await Order.find({ batchRef: args.batchId, userId: args.userId })
+                .populate("userId")
+                .populate("products.stockId")
+                .populate("batchRef")
+            return orders;
+        },
+        ownerOrders: async (_: any, args: { userId: string; }) => {
+            const orders = await Order.find({ userId: args.userId })
                 .populate("userId")
                 .populate("products.stockId")
                 .populate("batchRef")

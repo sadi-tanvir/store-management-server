@@ -5,6 +5,7 @@ export default gql`
     extend type Query {
         orders: [Order]
         getOrdersByBatchAndUserId(batchId: ID!, userId: ID!): [Order]
+        ownerOrders(userId: ID!): [Order]
     }
 
     extend type Mutation {
