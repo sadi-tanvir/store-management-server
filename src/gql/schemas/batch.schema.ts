@@ -12,6 +12,8 @@ export default gql`
 
     extend type Mutation {
         createBatch(data:BatchInputData!): BatchResponse
+        closeBatch(batchId: ID!): SimpleResponse
+        reopenBatch(batchId: ID!): SimpleResponse
     }
 
     input BatchInputData {

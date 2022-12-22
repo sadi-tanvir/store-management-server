@@ -60,14 +60,14 @@ const batchResolver = {
         createBatch: async (_: any, { data }: BatchType, context: ContextTypes) => {
             // checking admin
             const isAdmin = await checkAdminService(context)
-            if (!isAdmin) throw new Error("You are not authorized to add batch");
+            if (!isAdmin) throw new Error("You are not authorized to add the batch");
 
             // checking if batch exist
             const isBatchExist = await Batch.findOne({
                 userId: data.userId,
                 batchNo: data.batchNo
             });
-            if (isBatchExist) throw new Error("Batch already exist");
+            if (isBatchExist) throw new Error("This Batch already exist");
 
             // checking if batch exist
             const isOpenBatchExist = await Batch.findOne({
@@ -83,11 +83,45 @@ const batchResolver = {
                 description: data.description,
                 previousAmount: data.previousAmount
             })
-            if (!batch) throw new Error("Failed to Create a Brand.")
+            if (!batch) throw new Error("Failed to Create The Batch.")
 
             return {
                 status: true,
-                message: 'The batch has created successfully'
+                message: 'The batch has been created successfully'
+            }
+        },
+        closeBatch: async (_: any, { batchId }: { batchId: string; }, context: ContextTypes) => {
+            // checking admin
+            const isAdmin = await checkAdminService(context)
+            if (!isAdmin) throw new Error("You are not authorized to close the batch");
+
+            // close the Batch
+            const closeBatch = await Batch.findOneAndUpdate(
+                { _id: batchId },
+                { $set: { status: 'closed' } }
+            );
+            if (!closeBatch) throw new Error("Failed to Close the Batch.")
+
+            return {
+                status: true,
+                message: 'The batch has been closed successfully'
+            }
+        },
+        reopenBatch: async (_: any, { batchId }: { batchId: string; }, context: ContextTypes) => {
+            // checking admin
+            const isAdmin = await checkAdminService(context)
+            if (!isAdmin) throw new Error("You are not authorized to Re-Open the batch");
+
+            // Re-Open the Batch
+            const reOpenBatch = await Batch.findOneAndUpdate(
+                { _id: batchId },
+                { $set: { status: 'open' } }
+            );
+            if (!reOpenBatch) throw new Error("Failed to Re-Open the Batch.")
+
+            return {
+                status: true,
+                message: 'The batch has been Re-Opened successfully'
             }
         }
     }

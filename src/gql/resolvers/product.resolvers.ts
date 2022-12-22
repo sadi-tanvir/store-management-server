@@ -38,7 +38,6 @@ const productResolver = {
 
             // is product already exist?
             const isExistProduct = await Product.findOne({ name: data.name, 'brand.name': data.brand.name })
-            console.log('isExistProduct', isExistProduct);
 
             if (isExistProduct) throw new Error("The Product already exist");
 

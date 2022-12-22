@@ -30,7 +30,7 @@ const orderResolver = {
             if (!isAdmin) throw new Error("You are not authorized to add product");
 
             const orders = await Order.find()
-                .sort({ orderStatus: -1, paymentStatus: -1 })
+                .sort({ paymentStatus: -1, orderStatus: -1 })
                 .populate("userId")
                 .populate("products.stockId")
                 .populate("batchRef")

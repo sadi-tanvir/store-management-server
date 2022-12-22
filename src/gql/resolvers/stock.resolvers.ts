@@ -38,7 +38,6 @@ const stockResolver = {
 
             // is stock already exist?
             const isExistStock = await Stock.findOne({ name: data.name, 'brand.name': data.brand.name })
-            console.log(isExistStock);
 
             if (isExistStock) throw new Error("The Stock already exist");
 
