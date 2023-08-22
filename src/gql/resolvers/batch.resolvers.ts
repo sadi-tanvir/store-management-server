@@ -38,9 +38,9 @@ const batchResolver = {
             return batches;
         },
         getOpenBatchByUserRef: async (_: any, { userId }: { userId: string; }, context: ContextTypes) => {
-            // checking admin
-            const isAdmin = await checkAdminService(context)
-            if (!isAdmin) throw new Error("You are not authorized to get batches");
+            // checking user existence
+            const isUserExist = await isUserExistService({ email: context.email });
+            if (!isUserExist) throw new Error("You are not authorized to get the batch");
 
             const batches = await Batch.findOne({ userId, status: "open" })
                 .populate("userId").sort({ batchNo: -1, createdAt: -1 })
